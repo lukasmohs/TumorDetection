@@ -134,12 +134,14 @@ def main():
                                 bestProb = prob
                                 bestBottom_right = bottom_right
                                 bestTop_left = top_left
-                                #cv2.rectangle(img,bestTop_left, bestBottom_right, 255, 1)
-                                #plt.subplot(121),plt.imshow(bestProbImg,cmap = 'gray')
-                                #plt.title('Best Match: ' + str((sumProbabilityInner/sumProbabilityOuter))), plt.xticks([]), plt.yticks([])
-                                #plt.subplot(122),plt.imshow(baseTemplate,cmap = 'gray')
-                                #plt.title('Template'), plt.xticks([]), plt.yticks([])
-                                #plt.show()
+                                cv2.rectangle(img,bestTop_left, bestBottom_right, 255, 1)
+                                plt.subplot(131),plt.imshow(bestProbImg,cmap = 'gray')
+                                plt.title('Target Image'), plt.xticks([]), plt.yticks([])
+                                plt.subplot(132),plt.imshow(res,cmap = 'gray')
+                                plt.title('Result Matrix'), plt.xticks([]), plt.yticks([])
+                                plt.subplot(133),plt.imshow(template,cmap = 'gray')
+                                plt.title('Template'), plt.xticks([]), plt.yticks([])
+                                plt.show()
                             #print("prob: " + str(prob))
                             #print("probRation: " + str(probRatio))
                             #print("top_left: " + str(top_left))

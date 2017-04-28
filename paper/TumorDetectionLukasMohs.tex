@@ -59,7 +59,7 @@ Especially the development and refinement of the MRI technology favored advanced
 \subsection{Computer Vision}
 \label{cv}
 \textit{Computer Vision} (CV) is a field of \textit{Computer Science} that focusses on the way of how to digitally process, analyze and understand images. Driven by the development of cheap cameras and computing power, CV is applied in many cirsumstances to support or replace the human's richest sense: the eye.
-To provide a highlevel understanding of a CV identification or classification approach, one has to consider the digital representation of an image on the computer. This can be decomposed to a two-dimensional matrix, where each entry holds a tupel of three values: the \textit{\textbf{R}ed}, \textit{\textbf{G}reen} and \textit{\textbf{B}lue} (RGB) channel. This tupel identifies how the color of one specific \textit{pixel} is composed. These matrix of pixels is often referred to as \textit{raster graphic}. Figure \ref{fig:pixel} demonstrates this representation for three specific pixels within an image. Most common file types represent these three channel values  in a range between 0 and 255. The brightness of an image is therefore determined by the average of the sum of each pixel's RGB values. The contrast of an image is referring to the variance of the sum of each pixel's RGB values: the higher the difference, the stronger the contrast. These concepts are important to later understand the image processing algorithm.
+To provide a highlevel understanding of a CV identification or classification approach, one has to consider the digital representation of an image on the computer. This can be decomposed to a two-dimensional matrix, where each entry holds a tupel of three values: the \textit{\textbf{R}ed}, \textit{\textbf{G}reen} and \textit{\textbf{B}lue} (RGB) channel. This tupel identifies how the color of one specific \textit{pixel} is composed. These matrix of pixels is often referred to as \textit{raster graphic}. Figure \ref{fig:pixel} demonstrates this representation for three specific pixels within an image. In comparison to colorful images, \textit{grayscale images} just has a single channel, which indicates the brightness between black (0 \%) and white (100 \%). Most common file types represent the  channel values  in a range between 0 and 255. The brightness of a colorful image is therefore determined by the average of the sum of each pixel's RGB values. The contrast of an image is referring to the variance of the sum of each pixel's RGB values: the higher the difference, the stronger the contrast. These concepts are important to later understand the image processing algorithm.
 
 \begin{figure}
 	\centering
@@ -125,25 +125,35 @@ After preprocessing the images, the main part of the algorithm that extracts fea
 In the following, I will explain the development of the matching template as well as the exact matching application.
 
 \subsubsection{Template Development}
+\label{template-dev}
 To generate the template as an input for the matching process, I implemented an algorithm that develops a general pattern in form of an image that represents the average of a \textit{training image set}. As explain in section: \ref{cv}, a matrix can be used to represent each pixel of an image. Therefore, I manually selected some input tumor images and applied the algorithm provided in the \textit{generateTemplate.py} file. Each image is streched to the same size and to then calculate the average template matrix, the algorithm iterates over each pixel of each image and adds together all partial RGB values. This can be formulated as follows: 
+\\
 
+May $A_{j,k,c}^{i} \in \mathbb{N}$  and $0 < i < I , 0 < j < J , 0 < k < K , 0 < l < L $  
+\\
+
+where $I$ is the number of input pictures, 
+$j$ is the number of  rows, 
+$k$ is the number of columns and
+$c$ refers to the color index.
+Then, the average template image can be formulated as follows:
 $$
-\not\!\circ_{x,y,c} = \frac{\sum_{i=1}^{n} A_{x,y,c}^{i}}{n}
+\not\!\circ_{j,k,c} = \frac{\sum_{i=1}^{n} A_{j,k,c}^{i}}{I}
 $$
 
-where $A$ is the matrix of all sets $c$:
+$A^{i}$ can then be expressed as:
 \[
-A^{i}=
+(A)^{i}=
 \begin{bmatrix}
-a_{1,1} & ... & a_{1,x}\\ 
-... & ... & ... \\ 
-a_{y,1} & ... & a_{y,x}
+a_{1,1} & a_{1,2} &  ... & a_{1,k}\\ 
+a_{2,1} & a_{2,2} &  ... & a_{2,k}\\ 
+... & ... & ... & ... \\ 
+a_{j,1} & a_{j,2} & ... & a_{J,K}
 \end{bmatrix}
 \]
-and where $c$ is the set of the color channels RGB:
-$$
-c \in \{r,g,b\}
-$$
+and  $a_{j,k} \in \mathbb{N}^{3}$ is refering to one pixel consisting of 3 color channels
+\\
+
 
 Figure \ref{fig:template-generation} demonstrates the input and result of this template creation process.
 
@@ -152,6 +162,30 @@ Figure \ref{fig:template-generation} demonstrates the input and result of this t
 	\centering
 	\includegraphics[height=4cm]{template-generation}
 	\caption{Template Generation (left: input, right: output)}
+\end{figure}%
+
+\subsubsection{Matching Algorithm}
+The core function of the data extraction from the input files is realized within the \textit{processImages.py} file. As mentioned before, OpenCV was used for matching the previously generated template (see: section \ref{template-dev}). The corresponding method in the OpenCV library is called \textit{cv2.matchTemplate()} and it basically slides the template image over the target image and computes how simililar it is to the current frame. The output is a new image in grayscale, where each pixel that ranges from 0 to 255 indicates how well the template matched the specific frame.
+As an argument, the function takes a specific method out of a set of six possible ones. Since all methods for creating the \textit{result matrix} are based on a similar mathematical approach, I want to discuss the best performing ones, which are called \textit{CV\_TM\_SQDIFF\_NORMED} and \textit{CV\_TM\_CCORR\_NORMED}. The underlying mathematical model for CV\_TM\_SQDIFF\_NORMED can be formulated as:
+
+$$
+R(x,y) = \frac{\sum_{x^{'},y^{'}}^{}(T(x^{'},y^{'})-I(x+x^{'},y+y^{'}))^2}{\sqrt{\sum_{x^{'},y^{'}}^{}T(x^{'},y^{'})^2}*\sum_{x^{'},y^{'}}^{}(I(x+x^{'},y+y^{'})}
+$$
+
+where $T$ is the template, which is matched to the Image $I$ resulting in the result of this metric. Hence, the value of $R$ at position $(x,y)$ refers to the goodness of the fit of $T$ on $I$ at this point. \\
+The metric of CV\_TM\_CCORR\_NORMED is analogously defined as: 
+$$
+R(x,y) = \frac{\sum_{x^{'},y^{'}}^{}(T(x^{'},y^{'})*I(x+x^{'},y+y^{'}))^2}{\sqrt{\sum_{x^{'},y^{'}}^{}T(x^{'},y^{'})^2}*\sum_{x^{'},y^{'}}^{}(I(x+x^{'},y+y^{'})}
+$$
+\citep{opencvmethods}
+
+Since the result matrix is also interpretable as an image, one can visually see the results of the matching algorithm. Figure \ref{fig:result-matrix} visualizes the result matrix for a given matching problem.
+
+\begin{figure}
+	\label{fig:result-matrix}
+	\centering
+	\includegraphics[height=5cm]{result-matrix}
+	\caption{Target Image, Result Matrix and Template}
 \end{figure}%
 
 \bibliography{tumorDetection}

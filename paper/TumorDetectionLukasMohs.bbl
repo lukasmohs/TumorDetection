@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -34,10 +34,16 @@ Smith John Freymann Justin KirbyPaul Koppel Stephen Moore Stanley Phillips
 \newblock The cancer imaging archive (tcia): Maintaining and operating a public
   information repository".
 
-\bibitem[Opencv-Dev-Team()]{opencv}
+\bibitem[Opencv-Dev-Team({\natexlab{a}})]{opencv}
 Opencv-Dev-Team.
-\newblock Opencv 2.4.13.2 documentation.
+\newblock Opencv 2.4.13.2 documentation, {\natexlab{a}}.
 \newblock URL \url{"http://docs.opencv.org/2.4.13.2/"}.
+
+\bibitem[Opencv-Dev-Team({\natexlab{b}})]{opencvmethods}
+Opencv-Dev-Team.
+\newblock Template matching, {\natexlab{b}}.
+\newblock URL
+  \url{"http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/template_matching/template_matching.html"}.
 
 \bibitem[World-Health-Organization()]{cite2}
 World-Health-Organization.

@@ -14,6 +14,8 @@ I was expecting a `,' or a `}'---line 46 of file tumorDetection.bib
 I'm skipping whatever remains of this entry
 Warning--entry type for "opencv" isn't style-file defined
 --line 54 of file tumorDetection.bib
+Warning--entry type for "opencvmethods" isn't style-file defined
+--line 61 of file tumorDetection.bib
 Too many commas in name 1 of "Kenneth Clark, Bruce VendtKirk, Smith John, Freymann Justin, KirbyPaul Koppel Stephen, Moore Stanley, Phillips David, Maffitt Michael, Pringle Lawrence, Tarbox Fred" for entry cite3
 while executing---line 1347 of file plainnat.bst
 Too many commas in name 1 of "Kenneth Clark, Bruce VendtKirk, Smith John, Freymann Justin, KirbyPaul Koppel Stephen, Moore Stanley, Phillips David, Maffitt Michael, Pringle Lawrence, Tarbox Fred" for entry cite3
@@ -75,46 +77,47 @@ Warning--empty journal in cite3
 Warning--empty year in cite3
 Warning--empty year in cite3
 Warning--empty year in opencv
+Warning--empty year in opencvmethods
 Warning--empty year in cite2
-You've used 6 entries,
+You've used 7 entries,
             2773 wiz_defined-function locations,
-            622 strings with 6009 characters,
-and the built_in function-call counts, 2483 in all, are:
-= -- 198
-> -- 162
-< -- 5
-+ -- 57
-- -- 51
-* -- 184
-:= -- 397
-add.period$ -- 18
-call.type$ -- 6
-change.case$ -- 33
+            625 strings with 6141 characters,
+and the built_in function-call counts, 2791 in all, are:
+= -- 225
+> -- 172
+< -- 6
++ -- 62
+- -- 54
+* -- 205
+:= -- 443
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 37
 chr.to.int$ -- 6
-cite$ -- 18
-duplicate$ -- 105
-empty$ -- 200
-format.name$ -- 59
-if$ -- 501
-int.to.chr$ -- 1
+cite$ -- 21
+duplicate$ -- 120
+empty$ -- 232
+format.name$ -- 63
+if$ -- 566
+int.to.chr$ -- 2
 int.to.str$ -- 1
 missing$ -- 4
-newline$ -- 38
-num.names$ -- 24
-pop$ -- 90
+newline$ -- 43
+num.names$ -- 28
+pop$ -- 101
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 31
 quote$ -- 0
-skip$ -- 91
+skip$ -- 102
 stack$ -- 0
-substring$ -- 37
-swap$ -- 5
+substring$ -- 39
+swap$ -- 8
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 61
-warning$ -- 6
-while$ -- 20
+type$ -- 72
+warning$ -- 7
+while$ -- 23
 width$ -- 0
-write$ -- 76
+write$ -- 89
 (There were 29 error messages)
