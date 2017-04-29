@@ -237,7 +237,7 @@ In this subsection, the focus is directed to the selection of the best match out
 	
 \subsection{Classification}
 	Within the previous sections, the comlex process of the information gathering was described as the extraction of features became the main part of this project. Now, this input can be used  for the final classification task. It should be mentioned that the REMBRANDT data set just provides reliable labels for 33 patients (\textit{900-00-1961} to \textit{900-00-5477}) so that an excessive analysis can't be realized based on the given data set. \\
-	To clarify the actual outcome of the following prediction, the provided labels for each instance should be reviewed: The consulted radiologists used the following codes to identify the tumor location within the brain (see: section \ref{brain}). The codes are:
+	To clarify the actual outcome of the following prediction, the provided labels for each instance should be reviewed: The consulted radiologists used the following codes to identify the tumor location within the brain (see: section \ref{brain}):
 	\begin{itemize}
 		\item 0: no tumor
 		\item 1: frontal lobe
@@ -248,9 +248,15 @@ In this subsection, the focus is directed to the selection of the best match out
 		\item 6: brainstem 
 		\item 7: cerebellum
 	\end{itemize}
-
-	Due to the fact that insular lobe and 
+	Due to the fact that insular lobe is very small and a good localization is very hard since it is sorrounded by the parietal lobe when slicing top-down, these two instance values were combined for the prediction purpose.
+	An \textit{R} script named \textit{classifyImages.Rmd} is performing this second step of the ensemble classification. First, the extracted data is split into a training and test set containing the application of two ML algorithms that are trained on the test set and then perform an analysis on the test set. These algorithms are:
+	\begin{itemize}
+		\item Naive Bayes
+		\item Decision Tree
+	\end{itemize}
 	
+\section{Discussion}
+	Within this final chapter, I want to conclude the learning outcomes of this study. Primarily, it should be stated that the chosen approach was realized with limited resources regarding computing power, the training data as well as time. Most successful modern image classifiers rely on so-called \textit{deep learning} algorithms that use a set of many layers of \textit{software neurons} to imitate the functionality of the brain. Large implementations include hundrets of millions of entity types and billions of relationships and are trained on very large data sets \citep{deepLearning}.
 \bibliography{tumorDetection}
 %\appendix
 %\section*{Appendix A.}

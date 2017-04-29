@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -26,6 +26,11 @@ Robert~R Edelman and Steven Warach.
 \newblock Magnetic resonance imaging.
 \newblock \emph{New England Journal of Medicine}, 328\penalty0 (10):\penalty0
   708--716, 1993.
+
+\bibitem[Hof()]{deepLearning}
+Robert~D. Hof.
+\newblock Mit technology review: Deep learning.
+\newblock URL \url{"https://www.technologyreview.com/s/513696/deep-learning/"}.
 
 \bibitem[Kenneth~Clark()]{cite3}
 Smith John Freymann Justin KirbyPaul Koppel Stephen Moore Stanley Phillips

@@ -19,7 +19,7 @@ library(e1071)
 ### Reading the Features.csv Image Processing Output File
 ```{r eval=T, message=T}
 # reading an old one actually to directly study results
-data <- read.csv("features-old.csv")
+data <- read.csv("features.csv")
 data
 # Combine truth position 3 (insular) and 4 (parietal) due to the small size of the 
 # insular cortex and their close position in brain
