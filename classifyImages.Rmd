@@ -18,10 +18,14 @@ library(e1071)
   
 ### Reading the Features.csv Image Processing Output File
 ```{r eval=T, message=T}
-data <- read.csv("features.csv")
+# reading an old one actually to directly study results
+data <- read.csv("features-old.csv")
 data
+# Combine truth position 3 (insular) and 4 (parietal) due to the small size of the 
+# insular cortex and their close position in brain
 data$truePosition <- ifelse(data$truePosition==4, 3 , data$truePosition)
 data$truePosition <- as.factor(data$truePosition)
+# Remoce Ids to avoid overfitting
 data <- data[-c(which( colnames(data)=="id"))]
 ```
 

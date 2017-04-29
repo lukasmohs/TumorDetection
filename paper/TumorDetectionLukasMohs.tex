@@ -38,6 +38,7 @@ The high variance in the surivial rate is given by many factors such as the type
 In comparison to \textit{Computer Tomography} (CT), MRI doesn't rely on \textit{X-radiation}, which qualifies it as a less harmful method. It should be mentioned that the magnetic waves of MRI can affect \textit{cardiac pacemakers} so that exceptions apply. \citep{edelman1993magnetic}
 
 \subsection{The Human Brain}
+\label{brain}
 Especially the development and refinement of the MRI technology favored advanced studies about the structure and functionality of the human brain. In order to understand the classification task of the presented algorithm, the major parts of the human brain are shortly described and visualized in Figure \ref{fig:brain}:
 \begin{figure}
 	\centering
@@ -138,7 +139,7 @@ $k$ is the number of columns and
 $c$ refers to the color index.
 Then, the average template image can be formulated as follows:
 $$
-\not\!\circ_{j,k,c} = \frac{\sum_{i=1}^{n} A_{j,k,c}^{i}}{I}
+\not\!\circ_{j,k,c} = \frac{\sum_{i=1}^{I} A_{j,k,c}^{i}}{I}
 $$
 
 $A^{i}$ can then be expressed as:
@@ -172,7 +173,7 @@ $$
 R(x,y) = \frac{\sum_{x^{'},y^{'}}^{}(T(x^{'},y^{'})-I(x+x^{'},y+y^{'}))^2}{\sqrt{\sum_{x^{'},y^{'}}^{}T(x^{'},y^{'})^2}*\sum_{x^{'},y^{'}}^{}(I(x+x^{'},y+y^{'})}
 $$
 
-where $T$ is the template, which is matched to the Image $I$ resulting in the result of this metric. Hence, the value of $R$ at position $(x,y)$ refers to the goodness of the fit of $T$ on $I$ at this point. \\
+where $T$ is the template, which is matched against the Image $I$ resulting in the output of this metric. Hence, the value of $R$ at position $(x,y)$ refers to the goodness of the fit of $T$ on $I$ at this point. \\
 The metric of CV\_TM\_CCORR\_NORMED is analogously defined as: 
 $$
 R(x,y) = \frac{\sum_{x^{'},y^{'}}^{}(T(x^{'},y^{'})*I(x+x^{'},y+y^{'}))^2}{\sqrt{\sum_{x^{'},y^{'}}^{}T(x^{'},y^{'})^2}*\sum_{x^{'},y^{'}}^{}(I(x+x^{'},y+y^{'})}
@@ -211,7 +212,7 @@ In this subsection, the focus is directed to the selection of the best match out
 	\begin{figure}
 		\label{fig:ratio}
 		\centering
-		\includegraphics[height=4cm]{ratio}
+		\includegraphics[width=14cm]{ratio}
 		\caption{Application of Matching Ratio}
 	\end{figure}%
 	
@@ -235,7 +236,20 @@ In this subsection, the focus is directed to the selection of the best match out
 	Each row of this intermediate file is enriched with the most probable real tumor location. Since three radiologists were consulted for the evaluation of the tumor, the \textit{readTruthTable.py} file reads the provided information, evaluates the average of the provided expert opinions and returns them so that they can be written to the intermediate file.
 	
 \subsection{Classification}
-	Within the previous sections, the comlex process of the information gathering was described, which is used as an input for the final classification task.
+	Within the previous sections, the comlex process of the information gathering was described as the extraction of features became the main part of this project. Now, this input can be used  for the final classification task. It should be mentioned that the REMBRANDT data set just provides reliable labels for 33 patients (\textit{900-00-1961} to \textit{900-00-5477}) so that an excessive analysis can't be realized based on the given data set. \\
+	To clarify the actual outcome of the following prediction, the provided labels for each instance should be reviewed: The consulted radiologists used the following codes to identify the tumor location within the brain (see: section \ref{brain}). The codes are:
+	\begin{itemize}
+		\item 0: no tumor
+		\item 1: frontal lobe
+		\item 2: temporal lobe
+		\item 3: insular lobe
+		\item 4: parietal lobe
+		\item 5: occipital lobe
+		\item 6: brainstem 
+		\item 7: cerebellum
+	\end{itemize}
+
+	Due to the fact that insular lobe and 
 	
 \bibliography{tumorDetection}
 %\appendix

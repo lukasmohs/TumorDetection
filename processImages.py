@@ -150,33 +150,28 @@ def main():
                                 bestBottom_right = bottom_right
                                 bestTop_left = top_left
 
-                                cv2.circle(adjustedRes,((int(float(bestTop_left[0] + bestBottom_right[0])/2)),\
-                                    (int(float(bestTop_left[1] + bestBottom_right[1])/2))), radius, (0,255,0), 2)
-                                cv2.rectangle(adjustedRes,bestTop_left, bestBottom_right, (0,0,255), 2)
+                                #cv2.circle(adjustedRes,((int(float(bestTop_left[0] + bestBottom_right[0])/2)),\
+                                #    (int(float(bestTop_left[1] + bestBottom_right[1])/2))), radius, (0,255,0), 2)
+                                #cv2.rectangle(adjustedRes,bestTop_left, bestBottom_right, (0,0,255), 2)
 
-                                plt.subplot(131),plt.imshow(adjustedRes,cmap = 'gray')
-                                plt.title('Result Matrix\n ratio:' + str(probRatio)), plt.xticks([]), plt.yticks([])
+                                #plt.subplot(131),plt.imshow(adjustedRes,cmap = 'gray')
+                                #plt.title('Result Matrix\n ratio:' + str(probRatio)), plt.xticks([]), plt.yticks([])
 
-                                cv2.circle(bestProbImg,((int(float(bestTop_left[0] + bestBottom_right[0])/2)),\
-                                    (int(float(bestTop_left[1] + bestBottom_right[1])/2))), radius, (0,255,0), 2)
-                                cv2.rectangle(bestProbImg,bestTop_left, bestBottom_right, (0,255,0), 2)                               
+                                #cv2.circle(bestProbImg,((int(float(bestTop_left[0] + bestBottom_right[0])/2)),\
+                                #    (int(float(bestTop_left[1] + bestBottom_right[1])/2))), radius, (0,255,0), 2)
+                                #cv2.rectangle(bestProbImg,bestTop_left, bestBottom_right, (0,255,0), 2)                               
 
-                                plt.subplot(132),plt.imshow(bestProbImg,cmap = 'gray')
-                                plt.title('Target Image'), plt.xticks([]), plt.yticks([])
-                                plt.subplot(133),plt.imshow(template,cmap = 'gray')
-                                plt.title('Template'), plt.xticks([]), plt.yticks([])
-                                plt.show()
-                            #print("prob: " + str(prob))
-                            #print("probRation: " + str(probRatio))
-                            #print("top_left: " + str(top_left))
-                            #print("bottom_right: " + str(bottom_right))
+                                #plt.subplot(132),plt.imshow(bestProbImg,cmap = 'gray')
+                                #plt.title('Target Image'), plt.xticks([]), plt.yticks([])
+                                #plt.subplot(133),plt.imshow(template,cmap = 'gray')
+                                #plt.title('Template'), plt.xticks([]), plt.yticks([])
+                                #plt.show()
                 truth = truthDict[str(dirName.split("/")[-1])]
                 features.append(str(float(bestLayer)/layerCount))
                 features.append(str(float(bestBottom_right[0] + bestTop_left[0])/2))
                 features.append(str(float(bestBottom_right[1] + bestTop_left[1])/2))
                 features.append(str(bestRatio))
                 features.append(str(bestProb))
-                #print(features)
 
             features.append(str(truth))
             writeRow(outPutFile, features)
