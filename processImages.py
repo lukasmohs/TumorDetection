@@ -57,7 +57,6 @@ def main():
             features = []
             features.append(str(dirName.split("/")[-1]))
             for meth in methods:
-                print("Using method: " + str(meth))
                 layerCount = 1
                 bestProb = 0
                 bestRatio = 0
@@ -70,6 +69,7 @@ def main():
                     if f.endswith('.jpeg') or f.endswith('.jpg'):
                         layerCount = layerCount + 1
                         filePath = str(dirName) + "/"
+                        print("Using method: " + str(meth))
                         print("File:" + dirName + "/" +  str(f))
                         crop(filePath,str(f))
                         fileName = str(dirName) + "/" + "cropped_" + f
@@ -78,24 +78,19 @@ def main():
                         #print(str(getImageBrigthness(img)))
                         img2 = img.copy()
 
-                        templateSizingSteps = np.arange(0.5,1.5,0.25)
+                        templateSizingSteps = np.arange(0.5,2,0.5)
                         for step in templateSizingSteps:
                             print("Current resizing step: " + str(step))
                             template = baseTemplate
                             w, h, c = template.shape
-                            #print("template: " +str(template.shape[:2]))
+
                             template = cv2.resize(template,(int(h*step), int(w*step)), interpolation = cv2.INTER_CUBIC)      
 
                             img = img2.copy()
                             method = eval(meth)
-                            # Apply template Matching
+
                             res = cv2.matchTemplate(img,template,method)
-                            #print("res:" + str(res.shape[:2]))
-                            #print("img:" + str(img.shape[:2]))
                             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-                            #print("max_val" + str(max_val))
-                            #print("min_loc" + str(min_loc))
-                            #print("max_loc" + str(max_loc))
                             # If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
                             if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
                                 top_left = min_loc
@@ -115,7 +110,6 @@ def main():
                             radius = int(float(w*step)/5)
                             centerX = int(float(top_left[0] + bottom_right[0])/2)
                             centerY = int(float(top_left[1] + bottom_right[1])/2)
-                            #print("adjustedRes:" + str(adjustedRes.shape[:2]))
                             for x in range(top_left[0],top_left[0]+int(w*step),1):
                                 for y in range(top_left[1],top_left[1] + int(h*step),1):
                                     #if(x < len(res) and y <len(res[0])):
@@ -138,7 +132,7 @@ def main():
                                         
                             #print("inner: " + str(sumProbabilityInner))
                             #print("outer: " + str(sumProbabilityOuter))
-                            print("ratio: " + str(sumProbabilityInner/sumProbabilityOuter))
+                            #print("ratio: " + str(sumProbabilityInner/sumProbabilityOuter))
                             #print("layerCount" + str(layerCount))
                             prob = sumProbability/(w*step*h*step)
                             probRatio = float(sumProbabilityInner)/sumProbabilityOuter
