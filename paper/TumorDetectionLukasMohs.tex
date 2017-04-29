@@ -165,7 +165,7 @@ Figure \ref{fig:template-generation} demonstrates the input and result of this t
 \end{figure}%
 
 \subsubsection{Matching Algorithm}
-The core function of the data extraction from the input files is realized within the \textit{processImages.py} file. As mentioned before, OpenCV was used for matching the previously generated template (see: section \ref{template-dev}). The corresponding method in the OpenCV library is called \textit{cv2.matchTemplate()} and it basically slides the template image over the target image and computes how simililar it is to the current frame. The output is a new image in grayscale, where each pixel that ranges from 0 to 255 indicates how well the template matched the specific frame.
+The core function of the data extraction from the input files is realized within the \textit{processImages.py} file. As mentioned before, OpenCV was used for matching the previously generated template (see: section \ref{template-dev}). The corresponding method in the OpenCV library is called \textit{cv2.matchTemplate()} and it basically slides the template image over the target image and computes how simililar it is to the current frame. The output is a new image in grayscale, where each pixel that ranges from 0 to 255 indicates how well the template matched the specific frame. It needs to be mentioned that depending on the chosen method, this result matrix can also be inverted meaning that the brightness can also indicate the output of the \textit{error term}.
 As an argument, the function takes a specific method out of a set of six possible ones. Since all methods for creating the \textit{result matrix} are based on a similar mathematical approach, I want to discuss the best performing ones, which are called \textit{CV\_TM\_SQDIFF\_NORMED} and \textit{CV\_TM\_CCORR\_NORMED}. The underlying mathematical model for CV\_TM\_SQDIFF\_NORMED can be formulated as:
 
 $$
@@ -179,7 +179,7 @@ R(x,y) = \frac{\sum_{x^{'},y^{'}}^{}(T(x^{'},y^{'})*I(x+x^{'},y+y^{'}))^2}{\sqrt
 $$
 \citep{opencvmethods}
 
-Since the result matrix is also interpretable as an image, one can visually see the results of the matching algorithm. Figure \ref{fig:result-matrix} visualizes the result matrix for a given matching problem.
+Since the result matrix is also interpretable as an image, one can visually see the results of the matching algorithm. Figure \ref{fig:result-matrix} visualizes the result matrix for a given matching problem. The red square marks on the target image marks the corresponding position, which will be discussed again.
 
 \begin{figure}
 	\label{fig:result-matrix}
@@ -188,6 +188,55 @@ Since the result matrix is also interpretable as an image, one can visually see 
 	\caption{Target Image, Result Matrix and Template}
 \end{figure}%
 
+\subsubsection{Match Processing}
+\label{ratio}
+In this subsection, the focus is directed to the selection of the best match out of a sequence of images. When the result matrix for one image has been determined, it is required to further analyze the obtained result matrix in order compare it to the ones of other images. This is given by the fact, that a similar overall brightness level of the template favors a good match within an image sequence just due to the small distance in the color range. To overcome this problem, I invented a score that deals with this issue by computing a relative score for each retrieved result matrix. A specific characteristic of a good match is that the contrast between the matching position and its sorrpounding is quite high. This observation can be explained by the fact that the developed template his ring-shaped which lets it fit pretty well at a certain points but relatively bad in the area around it. To take advantage of this characteristic, the score basically evaluates the difference between the spot of the best matching point and the area. Hence, the template window size is taken around the matching point and a small circle is placed in the middle. This score, which can be uderstood as a ratio, can be formulated as follows:
+
+	IConsider $X$ as the set of pixels within the template frame, where each $ w \in X $ is defined by its two coordinates $w=(x,y)$. The set of pixels within that inner circle with radius $R \in \mathbb{R} $ around the centre $w_{1} = (x_{1},y_{1})$ is defined as:
+	$$ W_{1} = \{ (x,y) \in x: (x_{1} - x )^2+(y_{1} - y )^2 \leq R^2 \} $$ 
+	The set of pixels around the circle is then 
+	$$ W_{2} = X\setminus W_{1} $$
+	
+	Now, consider the function :
+	$$h:X\xrightarrow[]{} [0, 255] \in \mathbb{N}  $$
+	which maps each pixel to its brightness (the quality of the fit for this position). Then the total brightness of $K_{1} \in \mathbb{N} $ within the circle evaluates to:
+	$$ K_{1} = \sum_{w_{1} \in W_{1}} h(w_{1})$$
+	The total brigtness outside the circle is accordingly:
+	$$ K_{2} = \sum_{w_{2} \in W_{2}} h(w_{2})$$
+	Then, the final ratio $r$ can be computed as:
+	$$ r = K_{1}\setminus K_{2} $$
+	
+	A visualization of this approach is shown in Figure \ref{fig:ratio}, where the ratio identifies the best matching image and position in the sequence.
+	
+	\begin{figure}
+		\label{fig:ratio}
+		\centering
+		\includegraphics[height=4cm]{ratio}
+		\caption{Application of Matching Ratio}
+	\end{figure}%
+	
+	\subsubsection{Iteration steps and Output}
+	At this point, I want to shortly describe the iteration of the algorithm in detail so that potential advancements and modifications can be considered easily. After the algorithm has computed the template image, it traverses the directory of images for each patients image sequence. For each image in the sequence the image is cropped and matched against the template. Here, two variables can be used to modify the execution:
+	\begin{itemize}
+		\item \textit{methods} is a list of all available methods within the pattern matching function of OpenCV, which can be added or removed from the list. However, for each method the execution is realized ones and the best match added to the output set.
+		\item \textit{templateSizingSteps} is also a list that allows the programmer to specify the if the template should be resized to other proportions before matching. For each item in the list, the algorithm performs another execution and returns the best outcome.
+	\end{itemize}
+	
+	The information that are gathered through the execution are written to the \textit{features.csv} file, where for each patient and each applied method the following information are persisted:
+	
+	\begin{itemize}
+		\item \textit{relative position z} indicates in which image of the sequence with regard to the total number the bet match has been found.
+		\item \textit{position y} determines the y coordinate of the position of the match
+		\item \textit{position x} determines the x coordinate of the position of the match
+		\item \textit{best probability} is the sum of all pixel values within the best matching template frame
+		\item \textit{best probability ratio} is the value of relative probability score (see: section \ref{ratio}) 
+	\end{itemize}
+	
+	Each row of this intermediate file is enriched with the most probable real tumor location. Since three radiologists were consulted for the evaluation of the tumor, the \textit{readTruthTable.py} file reads the provided information, evaluates the average of the provided expert opinions and returns them so that they can be written to the intermediate file.
+	
+\subsection{Classification}
+	Within the previous sections, the comlex process of the information gathering was described, which is used as an input for the final classification task.
+	
 \bibliography{tumorDetection}
 %\appendix
 %\section*{Appendix A.}

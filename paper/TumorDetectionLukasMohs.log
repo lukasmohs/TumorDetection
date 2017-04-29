@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.24)  28 APR 2017 16:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.24)  28 APR 2017 21:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -330,7 +330,7 @@ LaTeX Info: Redefining \nameref on input line 18.
 
 LaTeX Warning: No \author given.
 
-<images/brain-areas.png, id=61, 1059.96pt x 454.69875pt>
+<images/brain-areas.png, id=69, 1059.96pt x 454.69875pt>
 File: images/brain-areas.png Graphic file (type png)
 
 <use images/brain-areas.png>
@@ -349,7 +349,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
- [2 <./images/brain-areas.png>] <images/pixel.png, id=87, 615.29875pt x 665.486
+ [2 <./images/brain-areas.png>] <images/pixel.png, id=95, 615.29875pt x 665.486
 25pt>
 File: images/pixel.png Graphic file (type png)
 
@@ -357,21 +357,21 @@ File: images/pixel.png Graphic file (type png)
 Package pdftex.def Info: images/pixel.png used on input line 66.
 (pdftex.def)             Requested size: 131.52617pt x 142.26378pt.
  [3 <./images/pixel.png>]
-<images/sequences.jpg, id=97, 1561.835pt x 533.995pt>
+<images/sequences.jpg, id=105, 1561.835pt x 533.995pt>
 File: images/sequences.jpg Graphic file (type jpg)
 
 <use images/sequences.jpg>
 Package pdftex.def Info: images/sequences.jpg used on input line 91.
 (pdftex.def)             Requested size: 416.10065pt x 142.26378pt.
 
-<images/full-sequence.jpg, id=98, 1204.5pt x 275.0275pt>
+<images/full-sequence.jpg, id=106, 1204.5pt x 275.0275pt>
 File: images/full-sequence.jpg Graphic file (type jpg)
 
 <use images/full-sequence.jpg>
 Package pdftex.def Info: images/full-sequence.jpg used on input line 108.
 (pdftex.def)             Requested size: 426.79134pt x 97.45288pt.
  [4 <./images/sequences.jpg>]
-<images/crop-image.jpg, id=108, 1085.05376pt x 532.99126pt>
+<images/crop-image.jpg, id=116, 1085.05376pt x 532.99126pt>
 File: images/crop-image.jpg Graphic file (type jpg)
 
 <use images/crop-image.jpg>
@@ -402,7 +402,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--156
 
  []
 
-<images/template-generation.jpg, id=121, 212.795pt x 74.2775pt>
+<images/template-generation.jpg, id=129, 212.795pt x 74.2775pt>
 File: images/template-generation.jpg Graphic file (type jpg)
 
 <use images/template-generation.jpg>
@@ -410,32 +410,44 @@ Package pdftex.def Info: images/template-generation.jpg used on input line 163.
 
 (pdftex.def)             Requested size: 326.0688pt x 113.81102pt.
  [6 <./images/template-generation.jpg>]
-<images/result-matrix.png, id=135, 571.13374pt x 236.885pt>
+<images/result-matrix.png, id=144, 571.13374pt x 236.885pt>
 File: images/result-matrix.png Graphic file (type png)
 
 <use images/result-matrix.png>
 Package pdftex.def Info: images/result-matrix.png used on input line 187.
 (pdftex.def)             Requested size: 343.00534pt x 142.26378pt.
- (./TumorDetectionLukasMohs.bbl [7 <./images/result-matrix.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
- (./TumorDetectionLukasMohs.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
+ [7 <./images/result-matrix.png>]
+<images/ratio.jpg, id=155, 2101.8525pt x 443.6575pt>
+File: images/ratio.jpg Graphic file (type jpg)
+ <use images/ratio.jpg>
+Package pdftex.def Info: images/ratio.jpg used on input line 214.
+(pdftex.def)             Requested size: 539.15643pt x 113.81102pt.
+
+Overfull \hbox (105.53644pt too wide) in paragraph at lines 214--215
+ [][] 
+ []
+
+[8 <./images/ratio.jpg>] (./TumorDetectionLukasMohs.bbl [9])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
+
+(./TumorDetectionLukasMohs.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
 Package rerunfilecheck Info: File `TumorDetectionLukasMohs.out' has not changed
 .
-(rerunfilecheck)             Checksum: D22B19C3F61B1DC979A35A1FCFDA90AE;910.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 196.
+(rerunfilecheck)             Checksum: F5DBB0B43104410B813FD4975BFFF5BF;1061.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 240.
  ) 
 Here is how much of TeX's memory you used:
- 6483 strings out of 493089
- 92870 string characters out of 6134842
- 180667 words of memory out of 5000000
- 9855 multiletter control sequences out of 15000+600000
+ 6497 strings out of 493089
+ 93081 string characters out of 6134842
+ 180773 words of memory out of 5000000
+ 9863 multiletter control sequences out of 15000+600000
  10980 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,28p,1241b,436s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,28p,1262b,436s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
@@ -444,16 +456,18 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TumorDetectionLukasMohs.pdf (8 pages, 2052228 bytes).
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on TumorDetectionLukasMohs.pdf (10 pages, 2211851 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 181 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 140 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 
