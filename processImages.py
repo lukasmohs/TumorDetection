@@ -78,7 +78,7 @@ def main():
                         #print(str(getImageBrigthness(img)))
                         img2 = img.copy()
 
-                        templateSizingSteps = np.arange(0.5,2,0.5)
+                        templateSizingSteps = np.arange(0.5,2.5,0.5)
                         for step in templateSizingSteps:
                             print("Current resizing step: " + str(step))
                             template = baseTemplate

@@ -32,9 +32,10 @@ data <- data[-c(which( colnames(data)=="id"))]
 
 ### Splitting Data into Train and Test Set
 ```{r eval=T, message=F}
-dataTrain = data[seq(1,nrow(data),2),]
-dataTest = data[seq(2,nrow(data),2),]
-
+#dataTrain = data[seq(1,nrow(data),2),]
+#dataTest = data[seq(2,nrow(data),2),]
+dataTrain = data[seq(1,25,1),]
+dataTest = data[seq(26,nrow(data),1),]
 ```
 
 ### Application of ML Algorithms
@@ -52,7 +53,6 @@ tree <- rpart(truePosition~ .,
              data=dataTrain,
              method="class")
 dtAccuracy <- (sum(predict(tree, dataTest, type="class")==dataTest$truePosition)) / nrow(dataTest)
-
 
 ```
 

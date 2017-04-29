@@ -17,29 +17,29 @@
 
 \begin{document}
 
-\title{Research Paper: Machine Learning Application for Brain Tumor Localization in the  Repository of Molecular Brain Neoplasia Data (REMBRANDT) }
+\title{Research Paper: Computer Vision and Machine Learning Application for Brain Tumor Localization in the  Repository of Molecular Brain Neoplasia Data (REMBRANDT) }
 
 \maketitle
 \textbf{Machine Learning for Health Care (Heinz 95-845) - Lukas Mohs}
 
 
 \section{Abstract}
-\noindent Within this paper, I want to present the putcome of the  combined application of \textit{Computer Vision} (CV) and  \textit{Machine Learning} (ML) to the \textit{Repository of Molecular Brain Neoplasia Data } (REMBRANDT) dataset. This dataset contains pre-surgical \textit{magnetic resonance} (MR) multi-sequence images of 130 patients. Based on a visual analysis and the application of several ML algorithms, I tried to predict the location of the brain tumor and compare it to the evaluation of three Radiologist, which defined the affected brain part and the potential impact on the brain functionality.i
+\noindent Within this paper, I want to present the outcome of the  combined application of \textit{Computer Vision} (CV) and  \textit{Machine Learning} (ML) to the \textit{Repository of Molecular Brain Neoplasia Data } (REMBRANDT) dataset. This dataset contains pre-surgical \textit{magnetic resonance} (MR) multi-sequence images of 130 patients. Based on a visual analysis and the application of several ML algorithms, I tried to predict the location of the brain tumor and compare it to the evaluation of three Radiologist, which defined the affected brain part and the potential impact on the brain functionality.
 
 \section{Introduction and Background}
 \subsection{Brain Cancer}
-Among all types of cancer, brain cancer is one of the deadliest even if it's not one of the most common ones. With a so-called \textit{5-Year Relative Survival Rate} of 32 \% for white people and 39 \% for black people it ranks on place 7 out of 26 for the lowest survival rate. Specific cancer types like \textit{Glioblastoma}, a very fast growing type of tumor, even has a a rate of 5\%. Especially in the later years of life, this rate decreases heavily for all types of brain cancer. \citep{cite1}
-The high variance in the surivial rate is given by many factors such as the type of tumor, the location and of course whether it was treated. Especially the latter ones formed a major part of scientific studies that included ways of scanning the human brain for malignant tissue as well as the way of stopping the growth of the tumor cells. \citep{cite2}
+Among all types of cancer, brain cancer is one of the deadliest even if it's not one of the most common ones. With a so-called \textit{5-Year Relative Survival Rate} of 32 \% for white people and 39 \% for black people brain cancer ranks on place seven out of 26 for the lowest survival rate. Specific cancer types like \textit{Glioblastoma}, a very fast growing type of tumor, even has a  rate of 5\%. Especially in the later years of life, this rate heavily decreases for all types of brain cancer. \citep{cite1}
+The high variance in the surivial rate is given by many factors such as the type of tumor, the location and obviously whether it was treated. Specifically the latter ones formed a major part of scientific studies that included ways of scanning the human brain for malignant tissue as well as the way of stopping the growth of the tumor cells. \citep{cite2}
 
 
 \subsection{Magnetic Resonance Imaging (MRI)}
-\textit{Magnetic Resonance Imaging} (MRI) addressed the challange of 
-\textit{scanning} the human body by using \textit{radiology}  to see different layers of the inner tissue or organs. These different layers can be combined together to construct a 3-dimensional model of any part of the body. Mainly a strong  \textit{magnetic fields} is used in combination with \textit{radio waves}  and so-called \textit{field gradients}.
+\textit{Magnetic Resonance Imaging} (MRI) addresses the challange of 
+\textit{scanning} the human body by using \textit{radiology}  to see different layers of the inner tissue or organs. These different layers can be combined together to construct a three-dimensional model of any part of the body. Mainly a strong  \textit{magnetic field} is used in combination with \textit{radio waves}  and so-called \textit{field gradients}.
 In comparison to \textit{Computer Tomography} (CT), MRI doesn't rely on \textit{X-radiation}, which qualifies it as a less harmful method. It should be mentioned that the magnetic waves of MRI can affect \textit{cardiac pacemakers} so that exceptions apply. \citep{edelman1993magnetic}
 
 \subsection{The Human Brain}
 \label{brain}
-Especially the development and refinement of the MRI technology favored advanced studies about the structure and functionality of the human brain. In order to understand the classification task of the presented algorithm, the major parts of the human brain are shortly described and visualized in Figure \ref{fig:brain}:
+In the past, the development and refinement of the MRI technology favored advanced studies about the structure and functionality of the human brain. In order to understand the classification task of the presented algorithm, the major parts of the human brain are shortly described and visualized in Figure \ref{fig:brain}:
 \begin{figure}
 	\centering
 	\includegraphics[width=10cm]{brain-areas}
@@ -50,8 +50,8 @@ Especially the development and refinement of the MRI technology favored advanced
 \begin{itemize}
 	\item \textit{Frontal Lobe:} resides in the front of the head and is the only lobe on the lateral surface and separated from the other ones. It is responsible for problem solving, planning but also processes stimuli from the nose. 
 	\item \textit{Temporal Lobe:} caudally joins the parietal and occipital lobe without a clear boundary. Researchers could show that it hosts the function of recognizing faces.
-	\item \textit{Parietal Lobe:} is Clear separated from frontal lobe but merges into temporal and occipital lobe. It is important for the control of the body including the sense of touch.
-	\item \textit{Occipital Lobe:} has also no clear coundary to its neighbours (parietal and temporal lobe). The stimuli of the eye are for example processed by this lobe.
+	\item \textit{Parietal Lobe:} is clearly separated from frontal lobe but merges into temporal and occipital lobe. It is important for the control of the body including the sense of touch.
+	\item \textit{Occipital Lobe:} has also no clear coundary to its neighbours (parietal and temporal lobe). The stimuli of the eye are  processed by this lobe.
 	\item \textit{The Insula:} is a small portion of the cerebral cortex and hidden by the other outer lobes. It is believed to be responsible for  consciousness.
 	\item \textit{The Cerebellum:} is placed on the back of the head below the occipital lobe and next to the \textit{brain stem}. It could be shown that it is responsible for fine motoric controls and languages.
 \end{itemize}
@@ -216,7 +216,8 @@ In this subsection, the focus is directed to the selection of the best match out
 		\caption{Application of Matching Ratio}
 	\end{figure}%
 	
-	\subsubsection{Iteration steps and Output}
+	\subsubsection{Modifications and Output}
+	\label{modifications}
 	At this point, I want to shortly describe the iteration of the algorithm in detail so that potential advancements and modifications can be considered easily. After the algorithm has computed the template image, it traverses the directory of images for each patients image sequence. For each image in the sequence the image is cropped and matched against the template. Here, two variables can be used to modify the execution:
 	\begin{itemize}
 		\item \textit{methods} is a list of all available methods within the pattern matching function of OpenCV, which can be added or removed from the list. However, for each method the execution is realized ones and the best match added to the output set.
@@ -249,18 +250,26 @@ In this subsection, the focus is directed to the selection of the best match out
 		\item 7: cerebellum
 	\end{itemize}
 	Due to the fact that insular lobe is very small and a good localization is very hard since it is sorrounded by the parietal lobe when slicing top-down, these two instance values were combined for the prediction purpose.
-	An \textit{R} script named \textit{classifyImages.Rmd} is performing this second step of the ensemble classification. First, the extracted data is split into a training and test set containing the application of two ML algorithms that are trained on the test set and then perform an analysis on the test set. These algorithms are:
+	An \textit{R} script named \textit{classifyImages.Rmd} is performing this second step of the ensemble classification. First, the extracted data is split into a training and test set. Then,  two ML algorithms  are trained on a train set (2/3) and then tested on the test set (1/3). These algorithms are:
 	\begin{itemize}
 		\item Naive Bayes
 		\item Decision Tree
 	\end{itemize}
 	
+	Considering again the extracted features from the image processing, outlines the major tasks of these algorithms to match the three-dimensional location information with a given probability to the nominal brain parts.
+	Both classifiers performed with an accuracy between 25\% and 50\% on the outcome variable of 7 stages. The performance depends a lot on the modifications of the variables as described in section \ref{modifications} and don't allow a realiable interpretation due to the small number of instances. 
+	\\
+	However, the single results of the image processing part qere quite promising when manually comparing the matches to the expert opinion.  Especially combining the different matching methods and joining the information with their probability ratio, results in accuracies around 75\%. 
+	
 \section{Discussion}
 	Within this final chapter, I want to conclude the learning outcomes of this study. Primarily, it should be stated that the chosen approach was realized with limited resources regarding computing power, the training data as well as time. Most successful modern image classifiers rely on so-called \textit{deep learning} algorithms that use a set of many layers of \textit{software neurons} to imitate the functionality of the brain. Large implementations include hundrets of millions of entity types and billions of relationships and are trained on very large data sets \citep{deepLearning}. In comparison to these applications, this paper addressed a different topic: One the one hand it could be shown that brain tumors share some visual characteristics, which resulted in the successfully matched template as described in section \ref{template-dev}. On the other hand, a relatively lightweight classification system could be implemented that might be further advanced and trained so that it supports the daily tumor identification process of a radiologist. Especially considering the constant improvement of body scanning technologies regarding harmfulness and quality emphasizes the need for an automized evaluation tool. 
 	
-	Technicaly, the presented approach could further benefit from a more sophisticated matching approach that applies image enhancements and additional transformations like rotating or distorting the template. Finally, images could be combined into a three-dimensional data structure where local maxima of the probability distributions could be identified even better.
+	Technically, the presented approach could further benefit from a more sophisticated matching approach that applies image enhancements and additional transformations like rotating or distorting the template. Finally, images could be combined into a three-dimensional data structure where local maxima of the probability distributions could be identified even better.
 	
-	To leverage the ML process, the most probable improvement can be found in the increasement of the training instances. Especially the building of correlations between the (relative) coordinates and a brain part 
+	To leverage the ML process, the most probable improvement can be found in the increasement of the training instances. Especially the building of correlations between the (relative) coordinates extracted in the CV part and the categorization into brain parts is hard to realize based on just a few instances. However, they should be strongly related.
+	\\
+	Summarizing all aspects, this study could combine two novel fields of Computer Science into one ensemble application and apply it to the area of health care. Given the high amount of potential improvements, the presented insights might form the solid basis for further studies in this way of combating cancer.
+	
 \bibliography{tumorDetection}
 %\appendix
 %\section*{Appendix A.}
